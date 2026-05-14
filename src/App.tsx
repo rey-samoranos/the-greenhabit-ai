@@ -7,9 +7,8 @@ import { supabase } from "./supabase";
 function App() {
   const [currentPage, setCurrentPage] = useState<"welcome" | "goal" | "planner" | "progress">("welcome");
   const [selectedGoal, setSelectedGoal] = useState<string>("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [, setIsAuthenticated] = useState(false);   
   // Check authentication status on app load
   useEffect(() => {
     const checkAuth = async () => {
