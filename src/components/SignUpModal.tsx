@@ -70,10 +70,11 @@ const SignUpModal: React.FC<SignUpModalProps> = ({
       setLoading(false);
     } else if (data.user && !data.user.confirmed_at) {
       // User created but email not confirmed
+      console.log("Showing confirmation modal for:", email);  // ADD THIS
       setRegisteredEmail(email);
       setShowConfirmationModal(true);
       setLoading(false);
-      onClose(); // Close sign-up modal
+      // onClose(); // Close sign-up modal
       // Note: onSignUpSuccess is NOT called here because email not confirmed yet
     } else {
       // User created and email already confirmed (if confirmation disabled)
