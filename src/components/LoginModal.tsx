@@ -243,11 +243,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
             </button>
           </form>
 
-          <div className="mt-4 p-3 bg-green-800/30 rounded-lg border border-green-500/20">
-            <p className="text-green-300 text-xs text-center font-fredoka">
-              Demo: demo@greenhabit.com / demo123
-            </p>
-          </div>
 
           <div className="mt-6 text-center pb-2">
             <p className="text-green-200 font-fredoka">
