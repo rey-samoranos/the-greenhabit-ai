@@ -22,9 +22,9 @@ export async function generateHabitPlan(goal: string): Promise<string[]> {
       throw new Error(data.error || "Invalid response from Edge Function")
     }
     
-  } catch (error) {
-    console.error("Edge Function error:", error)
-    // Re-throw the error instead of using fallback
-    throw new Error(`Failed to generate AI habits: ${error.message}`)
+  
+  } catch (error: any) {
+    console.error("Edge Function error:", error);
+    throw new Error(`Failed to generate AI habits: ${error.message}`);
   }
 }

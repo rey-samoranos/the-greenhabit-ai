@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import WelcomePage from "./components/WelcomePage";
+import { useState, useEffect } from "react";import WelcomePage from "./components/WelcomePage";
 import GoalSelectionPage from "./components/GoalSelectionPage";
 import HabitPlanner from "./components/HabitPlanner";
 import ProgressHistory from "./components/ProgressHistory";
