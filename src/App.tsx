@@ -1,14 +1,25 @@
-import { useState, useEffect } from "react";import WelcomePage from "./components/WelcomePage";
+import { useState, useEffect } from "react";
+import WelcomePage from "./components/WelcomePage";
 import GoalSelectionPage from "./components/GoalSelectionPage";
 import HabitPlanner from "./components/HabitPlanner";
 import ProgressHistory from "./components/ProgressHistory";
+import ResetPasswordPage from "./components/ResetPasswordPage";
 import { supabase } from "./supabase";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<"welcome" | "goal" | "planner" | "progress">("welcome");
   const [selectedGoal, setSelectedGoal] = useState<string>("");
   const [loading, setLoading] = useState(true);
-  const [, setIsAuthenticated] = useState(false);   
+  const [, setIsAuthenticated] = useState(false);
+  
+  // Check if we're on the reset password page
+  const isResetPasswordPage = window.location.pathname === '/reset-password';
+  
+  // Show Reset Password page directly if on that route
+  if (isResetPasswordPage) {
+    return <ResetPasswordPage />;
+  }
+  
   // Check authentication status on app load
   useEffect(() => {
     const checkAuth = async () => {

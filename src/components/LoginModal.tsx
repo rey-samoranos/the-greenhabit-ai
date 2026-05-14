@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { supabase } from '../supabase';
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   const [showResendModal, setShowResendModal] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
   const [resendMessage, setResendMessage] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (!isOpen) return null;
 
@@ -38,10 +40,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
     });
 
     if (error) {
-      // Check if error is due to unconfirmed email
       if (error.message.includes("Email not confirmed")) {
         setError("Please verify your email address first. Check your inbox for the confirmation link.");
         setResendEmail(email);
+      } else if (error.message.includes("Invalid login credentials")) {
+        setError("Invalid email or password. Please try again.");
       } else {
         setError(error.message);
       }
@@ -217,7 +220,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
               </label>
               <button
                 type="button"
-                onClick={() => alert("Password reset link will be sent to your email!")}
+                onClick={() => {
+                  onClose();
+                  setShowForgotPassword(true);
+                }}
                 className="text-[#81C784] text-sm hover:text-white transition font-fredoka"
               >
                 Forgot password?
@@ -243,7 +249,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
             </button>
           </form>
 
-
           <div className="mt-6 text-center pb-2">
             <p className="text-green-200 font-fredoka">
               Don't have an account?{" "}
@@ -263,6 +268,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
       {/* Resend Confirmation Modal */}
       <ResendModal />
+
+      {/* Forgot Password Modal */}
+      <ForgotPasswordModal
+        isOpen={showForgotPassword}
+        onClose={() => setShowForgotPassword(false)}
+        onSwitchToLogin={() => {
+          setShowForgotPassword(false);
+          // Reopen login modal? Actually the login modal is still open
+          // Just close forgot password modal
+        }}
+      />
     </>
   );
 };
