@@ -121,6 +121,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   return (
     <>
+      {/* Login Modal */}
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center animate-fadeIn">
         <div
           className="bg-gradient-to-br from-[#0A2F1F] to-[#1B5E20] rounded-2xl w-full max-w-md p-8 shadow-2xl border border-green-500/30 mx-4 transform transition-all animate-slideUp max-h-[90vh] overflow-y-auto"
@@ -220,10 +221,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
               </label>
               <button
                 type="button"
-                onClick={() => {
-                  onClose();
-                  setShowForgotPassword(true);
-                }}
+                onClick={() => setShowForgotPassword(true)}
                 className="text-[#81C784] text-sm hover:text-white transition font-fredoka"
               >
                 Forgot password?
@@ -269,15 +267,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
       {/* Resend Confirmation Modal */}
       <ResendModal />
 
-      {/* Forgot Password Modal */}
+      {/* Forgot Password Modal - Rendered on top of Login Modal */}
       <ForgotPasswordModal
         isOpen={showForgotPassword}
         onClose={() => setShowForgotPassword(false)}
-        onSwitchToLogin={() => {
-          setShowForgotPassword(false);
-          // Reopen login modal? Actually the login modal is still open
-          // Just close forgot password modal
-        }}
+        onSwitchToLogin={() => setShowForgotPassword(false)}
       />
     </>
   );
