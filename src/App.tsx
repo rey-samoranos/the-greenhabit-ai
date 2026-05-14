@@ -12,11 +12,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [, setIsAuthenticated] = useState(false);
   
-  // Check if we're on the reset password page
-  const isResetPasswordPage = window.location.pathname === '/reset-password';
-  
   // Show Reset Password page directly if on that route
-  if (isResetPasswordPage) {
+  if (window.location.pathname === '/reset-password') {
     return <ResetPasswordPage />;
   }
   

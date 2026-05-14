@@ -33,7 +33,7 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `https://the-greenhabit-ai.vercel.app/reset-password`,
+      redirectTo: `${window.location.origin}/reset-password`,
     });
 
     if (error) {
